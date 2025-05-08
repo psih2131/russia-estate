@@ -1,0 +1,18 @@
+.btn-v1 {
+    color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    padding: 16px 20px;
+    background: #5D736E;
+    border-radius: 100px;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    transition: all ease 0.3s;
+
+    &:hover {
+        background: $greenV2;
+        transition: all ease 0.3s;
+    }
+}
