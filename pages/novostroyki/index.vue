@@ -26,6 +26,8 @@
                         </div>
                     </div>
 
+
+                    <!-- seo box -->
                     <div class="real-estate-catalog-sec__seo-text-wrapper">
                         <div class="real-estate-catalog-sec__seo-text">
                             <p>“Russia Estate” это многофункциональный сервис, на страницах нашего портала вы сможете проверить как строиться интересующий вас комплекс на текущий момент, не является ли стройка проблемной, коих ...
@@ -37,7 +39,28 @@
                             </svg>    
                         </div>
                     </div>
+
+                    <!-- objects filtr -->
+                    <component__objects_filtr />
+
+
+                    <!-- objects list -->
+                    <div class="real-estate-catalog-sec__objects-container">
+
+                        <component__object />
+
+                        <component__object />
+
+                        <component__object />
+
+                        <component__object />
+
+                        <component__object />
+                        
+                    </div>
                 </div>
+
+                <!-- object map -->
                 <div class="real-estate-catalog-sec__map-wrapper estate-map"></div>
             </div>
         </section>
@@ -50,7 +73,8 @@
 <script setup>
 // import { useCounterStore } from '@/stores/counter'
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
-// import component__user_panel from '@/components/user-panel.vue'
+import component__object from '@/components/component__object.vue'
+import component__objects_filtr from '@/components/component__objects-filtrs.vue'
 
 //DATA
 const currentSearchType = ref('personPhone')

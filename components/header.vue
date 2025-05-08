@@ -12,7 +12,7 @@
                     </li>
 
                     <li class="header__nav-list">
-                        <a href="" class="header__nav-link">Застройщики</a>
+                        <NuxtLink class="header__nav-link" to="/zastroishchiki">Застройщики</NuxtLink>
                     </li>
 
                     <li class="header__nav-list">

@@ -64,6 +64,7 @@
     width: 100%;
     display: flex;
     margin-top: 11px;
+    margin-bottom: 20px;
 }
 
 .real-estate-catalog-sec__seo-text {
@@ -87,4 +88,16 @@
         display: block;
 
     }
+}
+
+.object-filtr-row {
+    display: flex;
+    align-items: center;
+}
+
+.real-estate-catalog-sec__objects-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(100% + 20px);
+    margin-left: -10px;
 }

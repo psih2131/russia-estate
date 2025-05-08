@@ -1,0 +1,201 @@
+.select-field {
+    width: 100%;
+}
+
+.select-field__title {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    color: $textColorDark;
+    margin-bottom: 6px;
+}
+
+.select-field__select {
+    width: 100%;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    padding: 10px 12px;
+    border: solid 1px #D0D5DD;
+    background: #fff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: #ccc;
+    border-radius: 8px;
+
+    option {
+        padding-left: 0;
+    }
+}
+
+
+
+
+
+//form-custom-select START
+.form__inp-wrapper-select {
+    margin-bottom: 24px;
+}
+
+.form-custom-select__wrapper {
+    position: relative;
+}
+
+.form__inp-title {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    color: $textColorDark;
+    margin-bottom: 6px;
+}
+
+.form-custom-select__current-value {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+
+    input {
+        border: 1px solid #CDD5DF;
+        width: 100%;
+        background: #FFF;
+        border-radius: 8px;
+        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+        padding: 8px 14px;
+        color: #697586;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        transition: all ease 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            border: 1px solid #CEE0E8;
+            transition: all ease 0.3s;
+            background: #FFF;
+            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px rgba(128, 211, 249, 0.24);
+        }
+    }
+
+
+}
+
+.form-custom-select__current-value_activ {
+    input {
+        border: 1px solid #CEE0E8;
+        transition: all ease 0.3s;
+        background: #FFF;
+        box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05), 0px 0px 0px 4px rgba(105, 117, 134, 0.05);
+    }
+}
+
+
+
+.form-custom-select__ar-wrapper {
+    position: absolute;
+    right: 14px;
+    transition: all ease 0.3s;
+    cursor: pointer;
+
+    svg {
+        display: block;
+    }
+}
+
+.form-custom-select__ar-wrapper_activ {
+    transform: rotate(180deg);
+}
+
+.form-custom-select__value-list {
+    margin-top: 0px;
+    border: 1px solid #E3E8EF;
+    background: #FFF;
+    border-radius: 8px;
+    box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+    padding: 6px;
+    height: 300px;
+}
+
+.form-custom-select__ul-value-list {
+    overflow-y: auto;
+    max-height: 400px;
+    padding-right: 4px;
+}
+
+.form-custom-select__ul-value-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-custom-select__ul-value-list::-webkit-scrollbar-track {}
+
+.form-custom-select__ul-value-list::-webkit-scrollbar-thumb {
+    background-color: #EAECF0;
+    outline: 0px solid slategrey;
+}
+
+.form-custom-select__vvalue-list-element {
+    padding: 10px 10px 10px 12px;
+    color: $textColorDark;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    cursor: pointer;
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all ease 0.3s;
+
+    &:hover {
+        padding-left: 20px;
+        transition: all ease 0.3s;
+    }
+}
+
+.form-custom-select__vvalue-list-element_active {
+    background: #F8FAFC;
+
+    &:before {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 10px;
+        content: "";
+        background-image: url('/assets/images/icons/check.svg');
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+//form-custom-select END
+
+.error-text-wrapper {
+    color: $red1;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.input-error-status {
+    input {
+        border: solid 1px $red1;
+
+        &:hover,
+        &:focus {
+            border: solid 1px $red1;
+        }
+    }
+
+    textarea {
+        border: solid 1px $red1;
+
+        &:hover,
+        &:focus {
+            border: solid 1px $red1;
+        }
+    }
+}
