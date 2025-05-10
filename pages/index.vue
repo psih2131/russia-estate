@@ -17,6 +17,8 @@ import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 const currentSearchType = ref('personPhone')
 
 
+  
+
 
 //METHODS 
 

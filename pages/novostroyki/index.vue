@@ -46,16 +46,10 @@
 
                     <!-- objects list -->
                     <div class="real-estate-catalog-sec__objects-container">
+                       
 
-                        <component__object />
+                        <component__object v-for="(item,index) in all_object" :key="index" :objectData="item" :currentClass="all_class"/>
 
-                        <component__object />
-
-                        <component__object />
-
-                        <component__object />
-
-                        <component__object />
                         
                     </div>
                 </div>
@@ -76,13 +70,20 @@ import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 import component__object from '@/components/component__object.vue'
 import component__objects_filtr from '@/components/component__objects-filtrs.vue'
 
+
 //DATA
 const currentSearchType = ref('personPhone')
 
+const { data: all_object } = await useFetch('http://russia-estate.local/wp-json/wp/v2/novostrojki')
 
+const { data: all_class } = await useFetch('http://russia-estate.local/wp-json/wp/v2/class_novostrojki')
+
+
+console.log('objects',all_object)
+
+console.log('add_class',all_class)
 
 //METHODS 
-
 
 
 function validSearch(){
