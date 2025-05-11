@@ -101,3 +101,10 @@
     width: calc(100% + 20px);
     margin-left: -10px;
 }
+
+.estate-map {
+    width: 776px;
+    height: calc(100vh - 100px);
+    position: sticky;
+    top: 50px;
+}

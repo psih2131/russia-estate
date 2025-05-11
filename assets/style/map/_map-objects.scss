@@ -1,0 +1,16 @@
+.map-objects {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    overflow: hidden;
+    border: solid 1px #ccc;
+}
+
+.map-objects__filtr-list {
+    position: absolute;
+    width: 250px;
+    z-index: 10;
+    left: 25px;
+    top: 25px;
+}

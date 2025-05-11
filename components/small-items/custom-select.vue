@@ -13,7 +13,7 @@
           </div>
           
  
-            <div class="form-custom-select__value-list" >
+            <div class="form-custom-select__value-list" :class="{'form-custom-select__value-list_activ': openStatusSelect}">
                 <ul class="form-custom-select__ul-value-list">
 
                   <li class="form-custom-select__vvalue-list-element" v-for="(item, index) in optionList" :key="index" 

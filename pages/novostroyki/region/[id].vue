@@ -4,8 +4,8 @@
         <section class="real-estate-catalog-sec">
             <div class="container">
                 <div class="real-estate-catalog-sec__body">
-                    <div class="real-estate-catalog-sec__header">
-                        <h1 class="real-estate-catalog-sec__title">Новостройки России</h1>
+                    <div class="real-estate-catalog-sec__header" v-if="current_region">
+                        <h1 class="real-estate-catalog-sec__title">{{current_region[0].acf.seo_zagolovok}}</h1>
                         <div class="real-estate-catalog-sec__order units-order-wrapper">
                             <div class="units-order-element units-order-element_activ">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,10 +28,9 @@
 
 
                     <!-- seo box -->
-                    <div class="real-estate-catalog-sec__seo-text-wrapper">
-                        <div class="real-estate-catalog-sec__seo-text">
-                            <p>“Russia Estate” это многофункциональный сервис, на страницах нашего портала вы сможете проверить как строиться интересующий вас комплекс на текущий момент, не является ли стройка проблемной, коих ...
-                            </p>
+                    <div class="real-estate-catalog-sec__seo-text-wrapper" v-if="current_region">
+                        <div class="real-estate-catalog-sec__seo-text" v-html="current_region[0].acf.seo_opisanie">
+                          
                         </div>
                         <div class="real-estate-catalog-sec__seo-text-wrapper-btn">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -53,9 +52,7 @@
                 </div>
 
                 <!-- object map -->
-                <div class="real-estate-catalog-sec__map-wrapper estate-map">
-                    <component__map :regionList="all_locations" />
-                </div>
+                <div class="real-estate-catalog-sec__map-wrapper estate-map"></div>
             </div>
         </section>
        
@@ -69,25 +66,25 @@
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 import component__object from '@/components/component__object.vue'
 import component__objects_filtr from '@/components/component__objects-filtrs.vue'
-import component__map from '@/components/map/map-objects.vue'
 
 
 //DATA
-const currentSearchType = ref('personPhone')
+const route = useRoute()
 
-const { data: all_object } = await useFetch('http://russia-estate.local/wp-json/wp/v2/novostrojki')
+const { data: current_region } = await useFetch(`http://russia-estate.local/wp-json/wp/v2/region?slug=${route.params.id}`)
+
+const { data: all_object } = await useFetch(`http://russia-estate.local/wp-json/wp/v2/novostrojki?region=${current_region.value[0].id}`)
 
 const { data: all_class } = await useFetch('http://russia-estate.local/wp-json/wp/v2/class_novostrojki')
-
-const { data: all_locations } = await useFetch('http://russia-estate.local/wp-json/wp/v2/region')
-
 
 console.log('objects',all_object)
 
 console.log('add_class',all_class)
 
-console.log('all_locations',all_locations)
+console.log('current_region',current_region)
 
+
+console.log('router',route.params.id)
 //METHODS 
 
 
