@@ -1,0 +1,73 @@
+.yandex-map-custom {
+    width: 100%;
+    height: 100%;
+
+
+}
+
+.ass {
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+
+.yandex-map-custom__marker {
+    position: relative;
+    width: 65px;
+    height: 82px;
+}
+
+.yandex-map-custom__marker-img-wrapper {
+    background: $orange1;
+    width: 65px;
+    height: 65px;
+    border-radius: 100px;
+    padding: 2px;
+}
+
+.yandex-map-custom__marker-down-wrapper {
+    width: 100%;
+    height: calc(82px - 65px);
+    display: flex;
+    justify-content: center;
+}
+
+.yandex-map-custom__marker-hr {
+    width: 2px;
+    height: 100%;
+    background: $orange1;
+}
+
+.yandex-map-custom__marker-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    display: block;
+}
+
+
+.cluster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background: green;
+    color: #fff;
+    border-radius: 100%;
+    cursor: pointer;
+    border: 2px solid limegreen;
+    outline: 2px solid green;
+    text-align: center;
+}
+
+.custom-cluster {
+    background-color: #ffcc00;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    color: #000;
+}

@@ -5,6 +5,10 @@
         <div class="map-objects__filtr-list">
             <item__map_select :regions="regionList" />
         </div>
+
+        <div class="map-objects__yandex-container">
+          <item__map_yandex />
+        </div>
         
    </div>
     
@@ -14,6 +18,7 @@
 
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 import item__map_select from '@/components/map/map-location-list.vue'
+import item__map_yandex from '@/components/map/map-yandex.vue'
 
 //DATA
 // const currentSearchType = ref('personPhone')

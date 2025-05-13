@@ -3,5 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   css: ['~/assets/style/main.scss'],
-  modules: ['nuxt-swiper'],
+  modules: ['nuxt-swiper', 'vue-yandex-maps/nuxt'],
+  yandexMaps: {
+    apikey: '3f39c994-7cf5-46f9-9a95-ead825d2a02c',
+  },
+
 })
