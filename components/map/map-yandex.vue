@@ -16,10 +16,15 @@
         <yandex-map-default-scheme-layer :settings="{ customization }" />
         <yandex-map-default-features-layer />
 
-        <yandex-map-clusterer zoom-on-cluster-click>
+        <!-- <yandex-map-clusterer
+        v-model="clusterer"
+        :grid-size="128"
+        zoom-on-cluster-click
+        @trueBounds="trueBounds = $event"
+        > -->
        
 
-        <yandex-map-marker
+        <!-- <yandex-map-marker
           v-for="(point, index) in points"
           :key="index"
           :settings="{ coordinates: point }"
@@ -34,9 +39,54 @@
           </div>
         </yandex-map-marker>
         
-        <div class="custom-cluster"></div>
-      </yandex-map-clusterer>
-        
+        <template #cluster="{ cluster }">
+            <div
+                class="cluster fade-in"
+                :style="{
+                background: 'red',
+                }"
+            >
+                {{ cluster.features.length }}
+            </div>
+        </template>
+
+      </yandex-map-clusterer> -->
+
+      <yandex-map-clusterer
+        v-model="clusterer"
+        :grid-size="64"
+        zoom-on-cluster-click
+   
+    >
+        <yandex-map-marker
+            v-for="(coordinates, index) in points"
+            :key="index"
+            :settings="{
+                coordinates,
+                onClick: () => background = background === 'red' ? 'green' : 'red',
+            }"
+        >
+            <div class="yandex-map-custom__marker">
+            <div class="yandex-map-custom__marker-img-wrapper">
+              <img src="@/assets/images/object-img-1.jpg" alt="" class="yandex-map-custom__marker-img" />
+            </div>
+            <div class="yandex-map-custom__marker-down-wrapper">
+              <div class="yandex-map-custom__marker-hr"></div>
+            </div>
+          </div>
+        </yandex-map-marker>
+        <template #cluster="{ length }">
+            <div
+                class="cluster fade-in"
+                :style="{
+                    'background': background,
+                }"
+            >
+                {{ length }}
+            </div>
+        </template>
+    </yandex-map-clusterer>
+       
         
 
         <!-- <yandex-map-default-marker :settings="{ coordinates: [36.627644, 55.755819] }"></yandex-map-default-marker> -->
@@ -68,6 +118,13 @@ const points = ref([
   [37.637644, 55.755819],
   [37.647644, 55.755819],
 ])
+
+const clusterer = shallowRef(null);
+const gridSize = ref(6);
+const trueBounds = ref([[0, 0], [0, 0]]);
+
+watch(clusterer, val => console.log('cluster', val));
+
 const customization = shallowRef([
     {
         "tags": "country",
