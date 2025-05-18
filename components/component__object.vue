@@ -41,7 +41,7 @@
                         <p class="object-element__location-text">{{objectData.acf.adres}}</p>
                     </div>
 
-                    <button class="object-element__location-btn btn-v1-small">Показать на карте</button>
+                    <button class="object-element__location-btn btn-v1-small" @click="showObjectOnMap()">Показать на карте</button>
                 </div>
 
                 <p class="object-element__short-description">{{objectData.acf.korotkoe_opisanie}}</p>
@@ -78,14 +78,19 @@
 </template>
 
 <script setup>
-// import { useCounterStore } from '@/stores/counter'
+//IMPORT STORE
+import { useCounterStore } from '@/stores/counter'
+
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 
-// import component__object from '@/components/component__object.vue.vue'
 
 //DATA
-const currentSearchType = ref('personPhone')
 
+// access the `store` variable anywhere in the component ✨
+const store = useCounterStore()
+
+const currentSearchType = ref('personPhone')
+const containerRef = ref(null)
 
 
  // props
@@ -97,14 +102,12 @@ const currentSearchType = ref('personPhone')
 
 
 //METHODS 
-const containerRef = ref(null)
+
 const slides = ref(Array.from({ length: 10 }))
 
 const swiper = useSwiper(containerRef, {
    
 })
-
-
 
 function getCurrentClass(item){
     let currentItem = item[0]
@@ -124,11 +127,14 @@ function getCurrentClass(item){
     }
 
     return currentValue;
-    
-
 }
 
 
+//show object on map request
+function showObjectOnMap(){
+    store.changeCurrentIdForOpenObjectOnMap(null)
+    store.changeCurrentIdForOpenObjectOnMap(props.objectData.id)
+}
 
 
 

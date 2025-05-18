@@ -54,7 +54,7 @@
 
                 <!-- object map -->
                 <div class="real-estate-catalog-sec__map-wrapper estate-map">
-                    <component__map :regionList="all_locations" />
+                    <component__map   :mapObjectsList="all_object" :regionList="all_locations" />
                 </div>
             </div>
         </section>
@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-// import { useCounterStore } from '@/stores/counter'
+import { useCounterStore } from '@/stores/counter'
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 import component__object from '@/components/component__object.vue'
 import component__objects_filtr from '@/components/component__objects-filtrs.vue'
@@ -73,13 +73,14 @@ import component__map from '@/components/map/map-objects.vue'
 
 
 //DATA
+const store = useCounterStore()
 const currentSearchType = ref('personPhone')
 
-const { data: all_object } = await useFetch('http://russia-estate.local/wp-json/wp/v2/novostrojki')
+const { data: all_object } = await useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/novostrojki`)
 
-const { data: all_class } = await useFetch('http://russia-estate.local/wp-json/wp/v2/class_novostrojki')
+const { data: all_class } = await useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/class_novostrojki`)
 
-const { data: all_locations } = await useFetch('http://russia-estate.local/wp-json/wp/v2/region')
+const { data: all_locations } = await useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/region`)
 
 
 console.log('objects',all_object)

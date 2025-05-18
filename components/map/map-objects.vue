@@ -3,11 +3,11 @@
    <div class="map-objects">
 
         <div class="map-objects__filtr-list">
-            <item__map_select :regions="regionList" />
+            <item__map_select :regions="regionList" :current="regionCurrentTitle"/>
         </div>
 
         <div class="map-objects__yandex-container">
-          <item__map_yandex />
+          <item__map_yandex  :yMapObjetList="mapObjectsList"/>
         </div>
         
    </div>
@@ -26,11 +26,11 @@ import item__map_yandex from '@/components/map/map-yandex.vue'
 
 
  // props
- const props = defineProps({
+const props = defineProps({
   regionList: Object,
-//   currentClass: Object,
-  
-  })
+  mapObjectsList: Object,
+  regionCurrentTitle: String,
+});
 
 
 //METHODS 

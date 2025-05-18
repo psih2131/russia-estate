@@ -5,9 +5,11 @@
         v-model="map"
         :settings="{
         theme,
+        camera,
         location: {
-        center: [37.617644, 55.755819],
-        zoom: 9,
+        center: [yMapCenterCordinats.lat, yMapCenterCordinats.lon,  ],
+        zoom: mainMapZoom,
+        duration: 1000,
         }
         }"
         width="100%"
@@ -16,87 +18,95 @@
         <yandex-map-default-scheme-layer :settings="{ customization }" />
         <yandex-map-default-features-layer />
 
-        <!-- <yandex-map-clusterer
-        v-model="clusterer"
-        :grid-size="128"
-        zoom-on-cluster-click
-        @trueBounds="trueBounds = $event"
-        > -->
-       
-
-        <!-- <yandex-map-marker
-          v-for="(point, index) in points"
-          :key="index"
-          :settings="{ coordinates: point }"
-        >
-          <div class="yandex-map-custom__marker">
-            <div class="yandex-map-custom__marker-img-wrapper">
-              <img src="@/assets/images/object-img-1.jpg" alt="" class="yandex-map-custom__marker-img" />
-            </div>
-            <div class="yandex-map-custom__marker-down-wrapper">
-              <div class="yandex-map-custom__marker-hr"></div>
-            </div>
-          </div>
-        </yandex-map-marker>
-        
-        <template #cluster="{ cluster }">
-            <div
-                class="cluster fade-in"
-                :style="{
-                background: 'red',
-                }"
-            >
-                {{ cluster.features.length }}
-            </div>
-        </template>
-
-      </yandex-map-clusterer> -->
+        <yandex-map-listener
+        :settings="{ 
+            onClick: logMapClick,
+            onActionEnd: getActionEndData,
+            onMouseDown: actionWithMap
+        }"
+    />
 
       <yandex-map-clusterer
         v-model="clusterer"
         :grid-size="64"
         zoom-on-cluster-click
-   
     >
         <yandex-map-marker
-            v-for="(coordinates, index) in points"
+            v-for="(elementData, index) in yMapObjetList"
             :key="index"
             :settings="{
-                coordinates,
-                onClick: () => background = background === 'red' ? 'green' : 'red',
+                coordinates: [elementData.acf.shirota, elementData.acf.dolgota, ],
+                zIndex: currentMarkerOpen === index ? 10 : 1
             }"
         >
             <div class="yandex-map-custom__marker">
-            <div class="yandex-map-custom__marker-img-wrapper">
-              <img src="@/assets/images/object-img-1.jpg" alt="" class="yandex-map-custom__marker-img" />
-            </div>
-            <div class="yandex-map-custom__marker-down-wrapper">
-              <div class="yandex-map-custom__marker-hr"></div>
-            </div>
+                <div class="yandex-map-custom__marker-wrapper">
+                    <div class="yandex-map-custom__marker-img-wrapper"  @click="openCurrentObjectPopup(index,elementData.acf.shirota,elementData.acf.dolgota)">
+                        <img :src="elementData.acf.logo_obekta_dlya_karty.sizes.large" alt="" class="yandex-map-custom__marker-img" />
+                    </div>
+                    <div class="yandex-map-custom__marker-down-wrapper">
+                        <div class="yandex-map-custom__marker-hr"></div>
+                    </div>
+
+                    <div class="yandex-map-custom__marker-dop-info yandex-map-marker-popup-info" v-if="currentMarkerOpen == index">
+                        <div class="yandex-map-marker-popup-info__close" @click="closeMarker()">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.209209 0.209209C0.488155 -0.0697365 0.940416 -0.0697365 1.21936 0.209209L5 3.98985L8.78064 0.209209C9.05958 -0.0697365 9.51184 -0.0697365 9.79079 0.209209C10.0697 0.488155 10.0697 0.940416 9.79079 1.21936L6.01015 5L9.79079 8.78064C10.0697 9.05958 10.0697 9.51184 9.79079 9.79079C9.51184 10.0697 9.05958 10.0697 8.78064 9.79079L5 6.01015L1.21936 9.79079C0.940416 10.0697 0.488155 10.0697 0.209209 9.79079C-0.0697365 9.51184 -0.0697365 9.05958 0.209209 8.78064L3.98985 5L0.209209 1.21936C-0.0697365 0.940416 -0.0697365 0.488155 0.209209 0.209209Z" fill="#5D736E"/>
+                            </svg>
+                        </div>
+                        <div class="yandex-map-marker-popup-info__wrapper">
+
+                            <div class="yandex-map-marker-popup-info__top">
+                                <div class="yandex-map-marker-popup-info__img-wrapper">
+                                    <div class="object-element__like">
+                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.6062 4.56796C8.7025 2.8623 5.77489 2.92418 3.94548 4.75358C2.05203 6.64704 2.05203 9.71693 3.94548 11.6104L9.4634 17.1283C10.0946 17.7594 11.1178 17.7594 11.749 17.1283L17.2669 11.6104C19.1604 9.71693 19.1604 6.64704 17.2669 4.75358C15.4375 2.92418 12.5099 2.8623 10.6062 4.56796ZM9.65947 5.89638L10.0348 6.27171C10.3504 6.58728 10.862 6.58728 11.1776 6.27171L11.5529 5.89638C12.8152 4.63408 14.8618 4.63408 16.1241 5.89638C17.3864 7.15868 17.3864 9.20528 16.1241 10.4676L10.6062 15.9855L5.08828 10.4676C3.82598 9.20528 3.82598 7.15868 5.08828 5.89638C6.35058 4.63408 8.39717 4.63408 9.65947 5.89638Z" fill="#5D736E"/>
+                                        </svg>    
+                                    </div>
+                                    <img :src="elementData.acf.galereya_izobrazhenij[0].img.url" alt="" class="yandex-map-marker-popup-info__img">
+                                </div>
+                                <p class="yandex-map-marker-popup-info__title">{{elementData.title.rendered}}</p>
+                                <p class="yandex-map-marker-popup-info__location">{{elementData.acf.adres}}</p>
+                                <div class="yandex-map-marker-popup-info__dop-info-rwo">
+                                    <div class="object-element__info-element">
+                                        от <b>{{elementData.acf.stoimost_kvartir_ot}} <span>₽</span></b>
+                                    </div>
+
+                                    <div class="object-element__info-element">
+                                        от <b>{{elementData.acf.kvadratura_kvartir_ot}}</b> кв<span>²</span> до <b>{{elementData.acf.kvadratura_kvartir_do}}</b> кв<span>²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="yandex-map-marker-popup-info__btn-wrapper">
+                                <NuxtLink class="object-element__btn-view-object btn-v1_map" :to="'/novostroyki/objects/' + elementData.slug" >Ознакомиться с обьектом</NuxtLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
           </div>
         </yandex-map-marker>
         <template #cluster="{ length }">
             <div
-                class="cluster fade-in"
-                :style="{
-                    'background': background,
-                }"
-            >
+                class="cluster fade-in">
                 {{ length }}
             </div>
         </template>
     </yandex-map-clusterer>
-       
-        
-
-        <!-- <yandex-map-default-marker :settings="{ coordinates: [36.627644, 55.755819] }"></yandex-map-default-marker> -->
-        </yandex-map>
+               
+    </yandex-map>
+    
   </div>
     
 </template>
 
 <script setup>
 
+//IMPORT STORE
+import { useCounterStore } from '@/stores/counter'
+
+//COMPONENTS
 import { ref, onMounted, onBeforeUnmount, computed, watch, shallowRef   } from 'vue';
 // import item__map_select from '@/components/map/map-location-list.vue'
 
@@ -107,23 +117,34 @@ import {
   YandexMapDefaultMarker,
   YandexMapMarker,
   YandexMapClusterer,
+  YandexMapListener,
+
+  YandexMapControlButton,
+  YandexMapControls,
+  YandexMapEntity, 
   
 } from 'vue-yandex-maps';
 
+
+//DATA
+const store = useCounterStore()
+
 const map = shallowRef(null);
-// массив точек
-const points = ref([
-  [37.617644, 55.755819],
-  [37.627644, 55.755819],
-  [37.637644, 55.755819],
-  [37.647644, 55.755819],
-])
+
+const yMapCenterCordinats = ref({
+    'lon': 55.755819,
+    'lat': 37.61444538776031,
+})
+
+const camera = ref({
+    duration: 2500,
+});
+
+const mainMapZoom = ref(12)
 
 const clusterer = shallowRef(null);
-const gridSize = ref(6);
-const trueBounds = ref([[0, 0], [0, 0]]);
-
-watch(clusterer, val => console.log('cluster', val));
+const currentMarkerOpen = ref(null);
+const curentZoomData = ref(null)
 
 const customization = shallowRef([
     {
@@ -6752,28 +6773,89 @@ const customization = shallowRef([
 ])
 
 
-//DATA
-// const currentSearchType = ref('personPhone')
-
-
-
  // props
  const props = defineProps({
-//   regionList: Object,
-//   currentClass: Object,
-  
-  })
+    yMapObjetList: Object,
+
+})
 
 
 //METHODS 
+function openCurrentObjectPopup(currentId, lat, lon){
+
+    console.log(map.value)
+    mainMapZoom.value = 13
+    yMapCenterCordinats.value = {
+        'lon': +lon + 0.02,
+        'lat': lat ,
+    }
+    // camera.value.tilt = (45 * Math.PI) / 180
+    currentMarkerOpen.value = currentId
+}
+
+function closeMarker(){
+    currentMarkerOpen.value = null
+}
+
+const getActionEndData = (object, event) => {
+    curentZoomData.value = object.location.zoom
+    console.log(object, event);
+};
+
+const logMapClick = (object, event) => {
+  console.log(object, event);
+};
+
+const actionWithMap = (object, event) => {
+    // closeMarker()
+    console.log(object, event);
+};
+
+function findCurrentObjectOnMap(currentValue) {
+   let currentElementIndex = props.yMapObjetList.findIndex(item => item.id === currentValue);
+   let currentElement = props.yMapObjetList[currentElementIndex]
+
+   console.log(currentElementIndex, currentElement)
+   let latCurrent = currentElement.acf.shirota
+   let lonCurrent = currentElement.acf.dolgota
 
 
+   openCurrentObjectPopup(currentElementIndex, latCurrent, lonCurrent)
+
+};
 
 
 
 
 
 //HOOKS
+
+watch(clusterer, val => console.log('cluster', val));
+
+// watch(store.currentIdForOpenObjectOnMap, val => {
+//     console.log('store was changed',store.currentIdForOpenObjectOnMap)
+// });
+
+
+watch(
+  () => store.currentIdForOpenObjectOnMap, (newValue, oldValue) => {     
+    console.log('Значение count изменилось:');
+    let currentValue = store.currentIdForOpenObjectOnMap
+    if(currentValue){
+        findCurrentObjectOnMap(currentValue)
+    }
+    else{
+        closeMarker()
+    }
+    
+  }
+
+);
+
+
+
+
+
 onMounted(() => {
   // Добавляем обработчик события scroll
 

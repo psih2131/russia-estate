@@ -13,20 +13,20 @@
 </template>
 
 <script setup>
-// import { useCounterStore } from '@/stores/counter'
+import { useCounterStore } from '@/stores/counter'
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 
 
 
 const route = useRoute()
+
+const store = useCounterStore()
+
 console.log(route.params.id)
 
-
-const { data: object_data_single } = await useFetch(`http://russia-estate.local/wp-json/wp/v2/novostrojki?slug=${route.params.id}`)
+const { data: object_data_single } = await useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/novostrojki?slug=${route.params.id}`)
 
 console.log(object_data_single)
-
-
 
 //HOOKS
 onMounted(() => {
