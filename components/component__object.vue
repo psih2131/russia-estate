@@ -10,6 +10,7 @@
                 class="object-element__slider"
                 :pagination="{
                 dynamicBullets: true,
+                clickable: true
                 }"
                 >
 
@@ -97,7 +98,6 @@ import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 // access the `store` variable anywhere in the component ✨
 const store = useCounterStore()
 
-const currentSearchType = ref('personPhone')
 const containerRef = ref(null)
 
 
@@ -170,3 +170,30 @@ onBeforeUnmount(() => {
 
 
 </script>
+
+
+<style >
+
+swiper-container::part(pagination) {
+  bottom: 10px; /* если нужно сместить пагинацию */
+}
+
+swiper-container::part(bullet) {
+  background-color:rgba(255, 255, 255, 0.67);
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+swiper-container::part(bullet-active) {
+  background-color: #fff;
+  width: 10px;
+  height: 10px;
+}
+
+</style>
+

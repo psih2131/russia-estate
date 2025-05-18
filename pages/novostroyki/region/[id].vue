@@ -38,7 +38,7 @@
 
                 <!-- object map -->
                 <div class="real-estate-catalog-sec__map-wrapper estate-map">
-                    <component__map   :mapObjectsList="all_object" :regionList="all_locations" :regionCurrentTitle="current_region[0].name" />
+                    <component__map   :mapObjectsList="all_object" :regionList="all_locations" :regionCurrentTitle="current_region[0]" />
                 </div>
 
             </div>

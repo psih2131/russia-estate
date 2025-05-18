@@ -2,7 +2,7 @@
 
 <div class="map-location-list" :class="{'map-location-list_activ': openStatus }">
     <div class="map-location-list__header" @click="openList()">
-        <p class="map-location-list__header-title" v-if="current">{{current}}</p>
+        <p class="map-location-list__header-title" v-if="current">{{current.name}}</p>
         <p class="map-location-list__header-title" v-else>Все города</p>
         <div class="map-location-list__ar">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +35,7 @@ const openStatus = ref(false)
  // props
  const props = defineProps({
      regions: Object, 
-     current: String, 
+     current: Object, 
   })
 
 

@@ -118,11 +118,9 @@ import {
   YandexMapMarker,
   YandexMapClusterer,
   YandexMapListener,
-
   YandexMapControlButton,
   YandexMapControls,
   YandexMapEntity, 
-  
 } from 'vue-yandex-maps';
 
 
@@ -141,7 +139,6 @@ const camera = ref({
 });
 
 const mainMapZoom = ref(12)
-
 const clusterer = shallowRef(null);
 const currentMarkerOpen = ref(null);
 const curentZoomData = ref(null)
@@ -6776,6 +6773,7 @@ const customization = shallowRef([
  // props
  const props = defineProps({
     yMapObjetList: Object,
+    yMapStartLocation: Object,
 
 })
 
@@ -6819,22 +6817,24 @@ function findCurrentObjectOnMap(currentValue) {
    let latCurrent = currentElement.acf.shirota
    let lonCurrent = currentElement.acf.dolgota
 
-
    openCurrentObjectPopup(currentElementIndex, latCurrent, lonCurrent)
-
 };
 
 
 
-
-
 //HOOKS
-
 watch(clusterer, val => console.log('cluster', val));
 
-// watch(store.currentIdForOpenObjectOnMap, val => {
-//     console.log('store was changed',store.currentIdForOpenObjectOnMap)
-// });
+watch(
+  () => props.yMapStartLocation,
+  (newVal) => {
+    if (newVal?.acf) {
+      yMapCenterCordinats.value.lon = newVal.acf.dolgota;
+      yMapCenterCordinats.value.lat = newVal.acf.shirota;
+    }
+  },
+  { immediate: true }
+)
 
 
 watch(
@@ -6853,9 +6853,6 @@ watch(
 );
 
 
-
-
-
 onMounted(() => {
   // Добавляем обработчик события scroll
 
@@ -6865,8 +6862,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
 
 });
-
-
 
 
 </script>

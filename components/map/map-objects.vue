@@ -7,7 +7,7 @@
         </div>
 
         <div class="map-objects__yandex-container">
-          <item__map_yandex  :yMapObjetList="mapObjectsList"/>
+          <item__map_yandex  :yMapObjetList="mapObjectsList" :yMapStartLocation="regionCurrentTitle"/>
         </div>
         
    </div>
@@ -21,7 +21,7 @@ import item__map_select from '@/components/map/map-location-list.vue'
 import item__map_yandex from '@/components/map/map-yandex.vue'
 
 //DATA
-// const currentSearchType = ref('personPhone')
+
 
 
 
@@ -29,7 +29,7 @@ import item__map_yandex from '@/components/map/map-yandex.vue'
 const props = defineProps({
   regionList: Object,
   mapObjectsList: Object,
-  regionCurrentTitle: String,
+  regionCurrentTitle: Object,
 });
 
 
