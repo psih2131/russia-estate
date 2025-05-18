@@ -7,6 +7,7 @@
     padding: 15px 30px 15px 15px;
     display: flex;
     justify-content: space-between;
+    transition: all ease 0.5s;
 
 }
 
@@ -94,9 +95,11 @@
 .object-element__location {
     display: flex;
     align-items: center;
+    max-width: calc(100% - 150px);
 
     svg {
         display: block;
+        min-width: 20px;
     }
 }
 
@@ -163,4 +166,8 @@
         max-height: 35px;
         display: block;
     }
+}
+
+.object-element__developer-table-view {
+    display: none;
 }

@@ -16,8 +16,6 @@
 import { useCounterStore } from '@/stores/counter'
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
 
-
-
 const route = useRoute()
 
 const store = useCounterStore()

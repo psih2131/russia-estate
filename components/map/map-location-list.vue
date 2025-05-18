@@ -46,9 +46,6 @@ function openList(){
 }
 
 
-
-
-
 //HOOKS
 onMounted(() => {
   // Добавляем обработчик события scroll

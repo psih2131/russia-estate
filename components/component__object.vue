@@ -38,13 +38,21 @@
                             <path d="M7.5 1.25C4.75 1.25 2.5 3.5 2.5 6.25C2.5 9.625 6.875 13.4375 7.0625 13.625C7.1875 13.6875 7.375 13.75 7.5 13.75C7.625 13.75 7.8125 13.6875 7.9375 13.625C8.125 13.4375 12.5 9.625 12.5 6.25C12.5 3.5 10.25 1.25 7.5 1.25ZM7.5 12.3125C6.1875 11.0625 3.75 8.375 3.75 6.25C3.75 4.1875 5.4375 2.5 7.5 2.5C9.5625 2.5 11.25 4.1875 11.25 6.25C11.25 8.3125 8.8125 11.0625 7.5 12.3125ZM7.5 3.75C6.125 3.75 5 4.875 5 6.25C5 7.625 6.125 8.75 7.5 8.75C8.875 8.75 10 7.625 10 6.25C10 4.875 8.875 3.75 7.5 3.75ZM7.5 7.5C6.8125 7.5 6.25 6.9375 6.25 6.25C6.25 5.5625 6.8125 5 7.5 5C8.1875 5 8.75 5.5625 8.75 6.25C8.75 6.9375 8.1875 7.5 7.5 7.5Z" fill="#1C274C" fill-opacity="0.6"/>
                         </svg>
                             
-                        <p class="object-element__location-text">{{objectData.acf.adres}}</p>
+                        <p class="object-element__location-text">{{cutText(objectData.acf.adres)}}</p>
                     </div>
 
                     <button class="object-element__location-btn btn-v1-small" @click="showObjectOnMap()">Показать на карте</button>
                 </div>
 
                 <p class="object-element__short-description">{{objectData.acf.korotkoe_opisanie}}</p>
+
+                <div class="object-element__developer-table-view">
+                    <a href="" class="object-element__developer-big-card" v-for="item in objectData.acf.zastrojshhik" :key="item">
+                        <img src="@/assets/images/developer.png" alt="">
+                        <!-- {{ item.post_title }} -->
+                    </a>
+                </div>
+                
             </div>
 
             <div class="object-element__body-down">
@@ -130,10 +138,18 @@ function getCurrentClass(item){
 }
 
 
+
 //show object on map request
 function showObjectOnMap(){
     store.changeCurrentIdForOpenObjectOnMap(null)
     store.changeCurrentIdForOpenObjectOnMap(props.objectData.id)
+}
+
+//cut location string
+function cutText(text) {
+  const limit = 50
+  if (!text) return ''
+  return text.length > limit ? text.slice(0, limit) + '...' : text
 }
 
 

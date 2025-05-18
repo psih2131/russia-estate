@@ -100,6 +100,120 @@
     flex-wrap: wrap;
     width: calc(100% + 20px);
     margin-left: -10px;
+
+}
+
+.real-estate-catalog-sec__objects-container_table-view {
+    .object-element {
+        width: calc(33.333% - 20px);
+        height: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        padding: 10px 10px 15px 10px;
+        border-radius: 12px;
+        display: block;
+    }
+
+    .object-element__img-wrapper {
+        width: 100%;
+        height: 230px;
+        border-radius: 10px;
+    }
+
+    .object-element__like {
+        top: 5px;
+        right: 5px;
+    }
+
+    .object-element__body {
+        padding: 15px 0 0 0;
+        width: 100%;
+        height: calc(100% - 230px);
+    }
+
+    .object-element__title {
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 22px;
+        margin-bottom: 15px;
+    }
+
+    .object-element__location-row {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .btn-v1-small {
+        margin-top: 0px;
+        color: #5D736E;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%;
+        background: none;
+        text-decoration: underline;
+    }
+
+    .object-element__location {
+        align-items: flex-start;
+        max-width: 100%;
+    }
+
+    .object-element__short-description {
+        display: none;
+    }
+
+
+    .object-element__button-row {
+        .object-element__developer-big-card {
+            display: none;
+        }
+    }
+
+    .object-element__btn-view-object {
+        width: 100%;
+        padding: 13px 0;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-align: center;
+    }
+
+    .object-element__developer-table-view {
+        display: block;
+        width: 100%;
+    }
+
+    .object-element__info-row {
+        flex-wrap: wrap;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .object-element__info-element {
+        font-size: 13px;
+        line-height: 1;
+        margin-bottom: 15px;
+
+        b {
+            font-size: 14px;
+        }
+    }
+
+    .object-element__developer-big-card {
+        img {
+            max-height: 30px;
+        }
+    }
+
+    .object-element__body-top {
+        margin-bottom: 20px;
+    }
+
 }
 
 .estate-map {
