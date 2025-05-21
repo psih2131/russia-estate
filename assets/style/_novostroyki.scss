@@ -93,6 +93,47 @@
 .object-filtr-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 3;
+    margin-bottom: 24px;
+}
+
+.object-filtr-row__fields-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.object-filtr-row__element {
+    margin-right: 15px;
+}
+
+.object-filtr-row__el-1 {
+    width: 140px;
+}
+
+.object-filtr-row__el-2 {
+    width: 185px;
+}
+
+.object-filtr-row__el-3 {
+    width: 150px;
+}
+
+.filtr-cancel {
+    width: 39px;
+    height: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    cursor: pointer;
+    background: $greenV1;
+
+    svg {
+        display: block;
+    }
 }
 
 .real-estate-catalog-sec__objects-container {
@@ -100,6 +141,8 @@
     flex-wrap: wrap;
     width: calc(100% + 20px);
     margin-left: -10px;
+    position: relative;
+    z-index: 2;
 
 }
 

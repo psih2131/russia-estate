@@ -1,0 +1,55 @@
+.price-range {
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #EEF0F2;
+    background: #FFF;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.price-range__field-title {
+    font-family: $titleFont;
+    color: rgba(28, 39, 76, 0.60);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-right: 5px;
+}
+
+.price-range__field-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.price-range__input {
+    width: auto;
+    color: $textColorDark;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    transition: all ease 0.3s;
+    font-family: $titleFont;
+    width: 120px;
+    border: none;
+
+    &::placeholder {
+        color: rgba(28, 39, 76, 0.60);
+    }
+}
+
+.price-range__field-wrapper-min {
+    margin-right: 15px;
+}
+
+.price-range__error {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    left: 0;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 5px;
+    color: $red1;
+}
