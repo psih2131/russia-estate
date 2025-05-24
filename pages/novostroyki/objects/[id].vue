@@ -142,7 +142,7 @@
             </div>
         </section>
         
-        <div class="single-object-description-sec">
+        <section class="single-object-description-sec">
             <div class="single-object-container">
                 <p class="single-object-description-sec__title">О жилом комплексе «Береговой»</p>
                 <div class="single-object-description-sec__text-container ">
@@ -171,7 +171,249 @@
 
                 </div>
             </div>
-        </div>
+        </section>
+
+
+
+        <section class="single-object-characteristics-sec">
+            <div class="single-object-container">
+                <h2 class="single-object-characteristics-sec__title single-object-title-v1">Основные характеристики</h2>
+                <div class="single-object-characteristics-sec__row">
+                    <div class="single-object-characteristics-sec__cluster">
+                        <ul class="single-object-characteristics-sec__cluster-list characteristics-cluster-list">
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].class_novostrojki[0]">
+                                <span class="characteristics-cluster-list__item-name">Класс недвижимости</span>
+                                <span class="characteristics-cluster-list__item-value">{{getCurrentClass(object_data_single[0].class_novostrojki)}}</span>
+                            </li>
+
+                            <template v-if="object_data_single[0].acf.status_doma">
+                                <li class="characteristics-cluster-list__item" 
+                                v-if="object_data_single[0].acf.status_doma != 'Дом сдан' && object_data_single[0].acf.srok_sdachi_obekta">
+                                    <span class="characteristics-cluster-list__item-name">Срок сдачи</span>
+                                    <span class="characteristics-cluster-list__item-value">{{object_data_single[0].acf.srok_sdachi_obekta}}</span>
+                                </li>
+
+                                <li class="characteristics-cluster-list__item" v-else>
+                                    <span class="characteristics-cluster-list__item-name">Статус обьекта:</span>
+                                    <span class="characteristics-cluster-list__item-value" v-if="object_data_single[0].acf.status_doma">{{object_data_single[0].acf.status_doma}}</span>
+                                    <span class="characteristics-cluster-list__item-value" v-else>-</span>
+                                </li>
+
+                            </template>
+                            
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.etazhnost">
+                                <span class="characteristics-cluster-list__item-name">Этажность</span>
+                                <span class="characteristics-cluster-list__item-value">{{object_data_single[0].acf.etazhnost}}</span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.kolichestvo_korpusov">
+                                <span class="characteristics-cluster-list__item-name">Количество корпусов:</span>
+                                <span class="characteristics-cluster-list__item-value">{{object_data_single[0].acf.kolichestvo_korpusov}}</span>
+                            </li>
+                            <li class="characteristics-cluster-list__item">
+                                <span class="characteristics-cluster-list__item-name">Застройщик</span>
+                                <span class="characteristics-cluster-list__item-value">
+                                    <a v-for="item in object_data_single[0].acf.zastrojshhik" :key="item"  class="characteristics-cluster-list__item-link">
+                                        {{ item.post_title }}
+                                    </a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="single-object-characteristics-sec__cluster">
+                        <ul class="single-object-characteristics-sec__cluster-list characteristics-cluster-list">
+                            <li class="characteristics-cluster-list__item" 
+                            v-if="object_data_single[0].acf.kvadratura_kvartir_ot && object_data_single[0].acf.kvadratura_kvartir_do">
+                                <span class="characteristics-cluster-list__item-name">Площадь квартир</span>
+                                <span class="characteristics-cluster-list__item-value">от {{object_data_single[0].acf.kvadratura_kvartir_ot}} кв<b>²</b> до {{ object_data_single[0].acf.kvadratura_kvartir_do }} кв<b>²</b></span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.vysota_potolkov">
+                                <span class="characteristics-cluster-list__item-name">Высота потолков</span>
+                                <span class="characteristics-cluster-list__item-value">{{ object_data_single[0].acf.vysota_potolkov }} м</span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.nalichie_lifta">
+                                <span class="characteristics-cluster-list__item-name">Наличие лифта</span>
+                                <span class="characteristics-cluster-list__item-value">{{object_data_single[0].acf.nalichie_lifta}}</span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.tip_materiala">
+                                <span class="characteristics-cluster-list__item-name">Тип стен</span>
+                                <span class="characteristics-cluster-list__item-value">{{object_data_single[0].acf.tip_materiala}}</span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.otdelka_kvartir">
+                                <span class="characteristics-cluster-list__item-name">Отделка квартир</span>
+                                <span class="characteristics-cluster-list__item-value">
+                                   {{ object_data_single[0].acf.otdelka_kvartir }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="single-object-characteristics-sec__cluster">
+                        <ul class="single-object-characteristics-sec__cluster-list characteristics-cluster-list">
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.blagoustrojstvo">
+                                <span class="characteristics-cluster-list__item-name">Благоустройство</span>
+                                <span class="characteristics-cluster-list__item-value characteristics-cluster-list__item-value--small-text">
+                                    {{ object_data_single[0].acf.blagoustrojstvo }}
+                                </span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.ohrana_i_dostup">
+                                <span class="characteristics-cluster-list__item-name">Охрана и доступ</span>
+                                <span class="characteristics-cluster-list__item-value characteristics-cluster-list__item-value--small-text">
+                                    {{ object_data_single[0].acf.ohrana_i_dostup }}
+                                </span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.blizhajshee_metro">
+                                <span class="characteristics-cluster-list__item-name">Ближайшее метро</span>
+                                <span class="characteristics-cluster-list__item-value">
+                                    {{ object_data_single[0].acf.blizhajshee_metro }}
+                                </span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.parkovka">
+                                <span class="characteristics-cluster-list__item-name">Парковка</span>
+                                <span class="characteristics-cluster-list__item-value">
+                                    {{ object_data_single[0].acf.parkovka }}
+                                </span>
+                            </li>
+                            <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.detskij_sad_shkola">
+                                <span class="characteristics-cluster-list__item-name">Детский сад / школа</span>
+                                <span class="characteristics-cluster-list__item-value">
+                                    {{ object_data_single[0].acf.detskij_sad_shkola }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="single-object-apartments-layout-sec">
+            <div class="single-object-container">
+                <h2 class="single-object-apartments-layout-sec__title single-object-title-v1">Типы планировок</h2>
+                <div class="single-object-apartments-layout-sec__slider-wrapper">
+
+
+                    <!-- render only for server -->
+                    <div class="apartments-layout-server" v-if="clientStatus == false">
+                        <div class="apartments-layout-slider__item" v-for="item in object_data_single[0].acf.planirovki_kvartir" :key="item">
+                            <div class="apartments-layout-slider__item-wrapper" ref="itemWrappers">
+                                <div class="apartments-layout-slider__item-header">
+                                    <p class="apartments-layout-slider__item-title">{{item.title_project}}</p>
+                                    <div class="apartments-layout-slider__item-sale" v-if="item.sale">{{item.sale}}%</div>
+                                </div>
+                                <div class="apartments-layout-slider__item-plan-wrapper">
+                                    <img :src="item.plan_img.url" :alt="item.plan_img.alt"  class="apartments-layout-slider__item-plan">
+                                </div>
+                                <div class="apartments-layout-slider__item-dop-info">
+                                    <div class="apartments-layout-slider__item-dop-row">
+                                        <p class="apartments-layout-slider__item-type-name">{{item.plan_title}}</p>
+                                        <div class="apartments-layout-slider__item-price-wrapper">
+                                            <p class="apartments-layout-slider__item-current-price" v-if="item.price_current_rub">
+                                                {{item.price_current_rub}} ₽
+                                            </p>
+                                            <p class="apartments-layout-slider__item-old-price" v-if="item.price_old_rub">
+                                                {{item.price_old_rub}} ₽
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="apartments-layout-slider__item-dop-info-string" v-if="item.plan_dop_info && item.plan_dop_info.length > 0">
+                                        <p class="apartments-layout-slider__item-dop-info-string-value" 
+                                        v-for="element in item.plan_dop_info" :key="element">
+                                        {{ element.text }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- render only for client -->
+                    <ClientOnly>
+                    <swiper-container 
+                    ref="apartmentsRef" 
+                    class="apartments-layout-slider"
+                    :pagination="{
+                    dynamicBullets: true,
+                    clickable: true
+                    }"
+
+                    :navigation="{
+                        enabled: true,
+                        prevEl: '.swiper-button-prev',
+                        nextEl: '.swiper-button-next'
+                    }"
+                    >
+                        <swiper-slide v-for="item in object_data_single[0].acf.planirovki_kvartir" :key="item">
+
+                            <div class="apartments-layout-slider__item">
+                                <div class="apartments-layout-slider__item-wrapper" ref="itemWrappers">
+                                    <div class="apartments-layout-slider__item-header">
+                                        <p class="apartments-layout-slider__item-title">{{item.title_project}}</p>
+                                        <div class="apartments-layout-slider__item-sale" v-if="item.sale">{{item.sale}}%</div>
+                                    </div>
+                                    <div class="apartments-layout-slider__item-plan-wrapper">
+                                        <img :src="item.plan_img.url" :alt="item.plan_img.alt"  class="apartments-layout-slider__item-plan">
+                                    </div>
+                                    <div class="apartments-layout-slider__item-dop-info">
+                                        <div class="apartments-layout-slider__item-dop-row">
+                                            <p class="apartments-layout-slider__item-type-name">{{item.plan_title}}</p>
+                                            <div class="apartments-layout-slider__item-price-wrapper">
+                                                <p class="apartments-layout-slider__item-current-price" v-if="item.price_current_rub">
+                                                    {{item.price_current_rub}} ₽
+                                                </p>
+                                                <p class="apartments-layout-slider__item-old-price" v-if="item.price_old_rub">
+                                                    {{item.price_old_rub}} ₽
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="apartments-layout-slider__item-dop-info-string" v-if="item.plan_dop_info && item.plan_dop_info.length > 0">
+                                            <p class="apartments-layout-slider__item-dop-info-string-value" 
+                                            v-for="element in item.plan_dop_info" :key="element">
+                                            {{ element.text }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </swiper-slide>
+
+                    </swiper-container>
+                    
+                    </ClientOnly>
+
+                    <div class="swiper-button-prev custom-nav" >
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+                    <div class="swiper-button-next custom-nav" >
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="single-object-gallery-sec">
+            <div class="single-object-container">
+                <div class="single-object-gallery-sec__title-row">
+                    <h2 class="single-object-gallery-sec__title single-object-title-v1">Дизайн и внешний вид</h2>
+                    <p class="single-object-gallery-sec__description" 
+                    v-if="object_data_single[0].acf.dizajn_i_vneshnij_vid_tekst"
+                    v-html="object_data_single[0].acf.dizajn_i_vneshnij_vid_tekst"></p>
+                </div>
+            </div>
+        </section>
         
         
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -183,7 +425,9 @@
 
 <script setup>
 import { useCounterStore } from '@/stores/counter'
-import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
+
+
+import { ref, onMounted, onBeforeUnmount, computed, watch,   } from 'vue';
 
 const route = useRoute()
 
@@ -201,11 +445,29 @@ const textEditor = ref(null)
 
 const textEditorWrapper = ref(null)
 
+const apartmentsRef = ref(null)
+
+const itemWrappers = ref([]);
+
+const clientStatus = ref(false)
+
 
 console.log(object_data_single)
 
 
 //methods
+
+//slider apart layout settings
+const swiperApartLayout = useSwiper(apartmentsRef, {
+   loop: true,
+   slidesPerView: 3,
+   spaceBetween: 0,
+   autoplay: {
+    delay: 1000,
+  },
+})
+
+
 function getCurrentClass(item){
     let currentItem = item[0]
     let currentValue
@@ -249,13 +511,33 @@ function openText(){
 
 }
 
+  console.log(process)
 
 //HOOKS
-onMounted(() => {
-  // Добавляем обработчик события scroll
+onMounted(async () => {
+  await nextTick(); // Ждём полной отрисовки DOM
 
-  
+  // Сбросим текущие высоты (если нужно повторно вызывать)
+  itemWrappers.value.forEach((el) => {
+    el.style.height = 'auto';
+  });
+
+  // Найдём максимальную высоту
+  const maxHeight = Math.max(...itemWrappers.value.map(el => el.offsetHeight));
+
+  // Установим всем одинаковую высоту
+  itemWrappers.value.forEach((el) => {
+    el.style.height = `${maxHeight}px`;
+  });
+
+
+  clientStatus.value = true
+  console.log(swiperApartLayout.instance)
+
+  console.log(process)
+
 });
+
 
 onBeforeUnmount(() => {
 
