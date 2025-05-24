@@ -413,6 +413,122 @@
                     v-html="object_data_single[0].acf.dizajn_i_vneshnij_vid_tekst"></p>
                 </div>
             </div>
+
+            <div class="single-object-gallery-sec__slider-wrapper">
+                <!-- render only for client -->
+                <ClientOnly>
+                <swiper-container 
+                ref="galleryRef" 
+                class="gallery-slider"
+                :pagination="{
+                dynamicBullets: true,
+                clickable: true
+                }"
+
+                :navigation="{
+                    enabled: true,
+                    prevEl: '.gallery-button-prev',
+                    nextEl: '.gallery-button-next'
+                }"
+                >
+                    <swiper-slide v-for="item in object_data_single[0].acf.object_gallery_images" :key="item">
+
+                        <div class="gallery-slider__item">
+                            <div class="gallery-slider__item-wrapper" >
+                                <img :src="item.img.url" :alt="item.img.alt" class="gallery-slider__item-image">
+                            </div>
+                        </div>
+                        
+                    </swiper-slide>
+
+                </swiper-container>
+                    
+                </ClientOnly>
+
+                <div class="gallery-button-prev custom-nav" >
+                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
+                    </svg>
+                </div>
+                <div class="gallery-button-next custom-nav" >
+                    <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
+                    </svg>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="single-object-places-sec">
+            <div class="single-object-container">
+                <div class="single-object-gallery-sec__title-row">
+                    <h2 class="single-object-gallery-sec__title single-object-title-v1">Ближайшие точки интереса</h2>
+                    <p class="single-object-gallery-sec__description" 
+                    v-if="object_data_single[0].acf.dizajn_i_vneshnij_vid_tekst"
+                    v-html="object_data_single[0].acf.dizajn_i_vneshnij_vid_tekst"></p>
+                </div>
+
+                <div class="single-object-places-sec__slider-wrapper">
+                     <!-- render only for client -->
+                    <ClientOnly>
+                    <swiper-container 
+                    ref="placesRef" 
+                    class="places-slider"
+                    :pagination="{
+                    dynamicBullets: true,
+                    clickable: true
+                    }"
+
+                    :navigation="{
+                        enabled: true,
+                        prevEl: '.places-button-prev',
+                        nextEl: '.places-button-next'
+                    }"
+                    >
+                        <swiper-slide v-for="item in object_data_single[0].acf.tochki_interesa" :key="item">
+
+                            <div class="places-slider-slider__item">
+                                <div class="places-slider-slider__item-wrapper" >
+                                    <img :src="item.izobrazhenie.url" :alt="item.izobrazhenie.alt" class="places-slider-slider__item-image">
+                                    <div class="places-slider-slider__item-info">
+                                        <p class="places-slider-slider__item-title">{{item.nazvanie}}</p>
+                                        <p class="places-slider-slider__item-description">{{item.opisanie}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </swiper-slide>
+
+                    </swiper-container>
+                        
+                    </ClientOnly>
+
+                    <div class="places-button-prev custom-nav" >
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+                    <div class="places-button-next custom-nav" >
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section class="single-object-location-sec">
+            <div class="single-object-container">
+                <h2 class="single-object-location-sec__title single-object-title-v1">Расположение и инфраструктура</h2>
+
+                <div class="single-object-location-sec__map-wrapper">
+                    <component__map_single />
+                </div>
+            </div>
         </section>
         
         
@@ -426,14 +542,14 @@
 <script setup>
 import { useCounterStore } from '@/stores/counter'
 
-
 import { ref, onMounted, onBeforeUnmount, computed, watch,   } from 'vue';
+
+import component__map_single from '@/components/map/map-single-object.vue'
+
 
 const route = useRoute()
 
 const store = useCounterStore()
-
-console.log(route.params.id)
 
 const { data: object_data_single } = await useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/novostrojki?slug=${route.params.id}`)
 
@@ -451,9 +567,13 @@ const itemWrappers = ref([]);
 
 const clientStatus = ref(false)
 
+const galleryRef = ref(null)
+
+const placesRef = ref(null)
+
+console.log(route.params.id)
 
 console.log(object_data_single)
-
 
 //methods
 
@@ -461,13 +581,28 @@ console.log(object_data_single)
 const swiperApartLayout = useSwiper(apartmentsRef, {
    loop: true,
    slidesPerView: 3,
-   spaceBetween: 0,
-   autoplay: {
-    delay: 1000,
-  },
+   spaceBetween: 0,   
+   speed: 700,
 })
 
+//slider gallery
+const swiperGallery = useSwiper(galleryRef, {
+   loop: true,
+   slidesPerView: 3,
+   spaceBetween: 0,
+   centeredSlidesBounds: true,
+   speed: 700,
+})
 
+//places gallery
+const swiperPlaces = useSwiper(placesRef, {
+    loop: true,
+   slidesPerView: 4,
+   spaceBetween: 0,   
+   speed: 700,
+})
+
+//find current class name
 function getCurrentClass(item){
     let currentItem = item[0]
     let currentValue
@@ -508,10 +643,8 @@ function openText(){
     else{
         textEditorWrapper.value.style.height = '550px'
     }
-
 }
 
-  console.log(process)
 
 //HOOKS
 onMounted(async () => {
@@ -533,8 +666,6 @@ onMounted(async () => {
 
   clientStatus.value = true
   console.log(swiperApartLayout.instance)
-
-  console.log(process)
 
 });
 
