@@ -471,7 +471,7 @@
                 </div>
 
                 <div class="single-object-places-sec__slider-wrapper">
-                     <!-- render only for client -->
+                    <!-- render only for client -->
                     <ClientOnly>
                     <swiper-container 
                     ref="placesRef" 
@@ -523,13 +523,65 @@
 
         <section class="single-object-location-sec">
             <div class="single-object-container">
-                <h2 class="single-object-location-sec__title single-object-title-v1">Расположение и инфраструктура</h2>
+                <h2 class="single-object-location-sec__title single-object-title-v1">Расположение</h2>
 
                 <div class="single-object-location-sec__map-wrapper">
-                    <component__map_single />
+                    <component__map_single :yMapObjetList="object_data_single" />
                 </div>
             </div>
         </section>
+
+
+        <section class="single-object-recomends-sec" v-if="object_data_single && object_data_single.length > 0">
+            <div class="single-object-container">
+                <h2 class="single-object-recomends-sec__title single-object-title-v1">Возможно вам будет интересно</h2>
+
+                <div class="single-object-recomends-sec__slider-wrapper">
+                    <!-- render only for client -->
+                    <!-- <ClientOnly> -->
+                    <swiper-container 
+                    ref="recomendRef" 
+                    class="recomend-slider"
+                    :pagination="{
+                    dynamicBullets: true,
+                    clickable: true
+                    }"
+
+                    :navigation="{
+                        enabled: true,
+                        prevEl: '.recomend-button-prev',
+                        nextEl: '.recomend-button-next'
+                    }"
+                    >
+                        <swiper-slide v-for="item in object_data_single[0].acf.rekomenduemye_obekty" :key="item">
+
+                            <div class="recomend-slider__wrapper">
+                                <component__recomend_object :recObjData="item" :currentClass="all_class"/>
+                            </div>
+                            
+                            
+                        </swiper-slide>
+
+                    </swiper-container>
+                        
+                    <!-- </ClientOnly> -->
+
+                    <div class="recomend-button-prev custom-nav" >
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+                    <div class="recomend-button-next custom-nav" >
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
         
         
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -540,11 +592,15 @@
 </template>
 
 <script setup>
+//import component and global scripts
 import { useCounterStore } from '@/stores/counter'
 
 import { ref, onMounted, onBeforeUnmount, computed, watch,   } from 'vue';
 
 import component__map_single from '@/components/map/map-single-object.vue'
+
+import component__recomend_object from '@/components/component__object-recomend.vue'
+
 
 
 const route = useRoute()
@@ -571,11 +627,23 @@ const galleryRef = ref(null)
 
 const placesRef = ref(null)
 
+const recomendRef = ref(null)
+
 console.log(route.params.id)
 
 console.log(object_data_single)
 
-//methods
+
+
+// PROPS
+const props = defineProps({
+//   mainData: Object,
+      // postAllCategory: Object,
+})
+
+
+
+//METHODS
 
 //slider apart layout settings
 const swiperApartLayout = useSwiper(apartmentsRef, {
@@ -597,6 +665,15 @@ const swiperGallery = useSwiper(galleryRef, {
 //places gallery
 const swiperPlaces = useSwiper(placesRef, {
     loop: true,
+   slidesPerView: 4,
+   spaceBetween: 0,   
+   speed: 700,
+})
+
+
+//places gallery
+const swiperRecomend = useSwiper(recomendRef, {
+   loop: true,
    slidesPerView: 4,
    spaceBetween: 0,   
    speed: 700,
@@ -676,9 +753,4 @@ onBeforeUnmount(() => {
 
 
 
- // props
- const props = defineProps({
-//   mainData: Object,
-      // postAllCategory: Object,
-  })
 </script>
