@@ -1,17 +1,18 @@
 <template>
     <div class="app-wrapper">
-        <component__header />
+        <componentHeader />
         
         <slot/>
     
-        <component__footer />
+        <componentFooter />
     </div>
 </template>
 
 <script setup>
 // import { useCounterStore } from '@/stores/counter'
 import { ref, onMounted, onBeforeUnmount, computed, watch  } from 'vue';
-import component__header from '@/components/header.vue'
+import componentHeader from '@/components/header.vue'
+import componentFooter from '@/components/footer.vue'
 
 //DATA
 const currentSearchType = ref('personPhone')

@@ -465,7 +465,9 @@
                 <h2 class="single-object-location-sec__title single-object-title-v1">Расположение</h2>
 
                 <div class="single-object-location-sec__map-wrapper">
-                    <component__map_single :yMapObjetList="object_data_single" />
+                    <ClientOnly>
+                        <component__map_single :yMapObjetList="object_data_single" />
+                    </ClientOnly>
                 </div>
             </div>
         </section>
@@ -557,12 +559,6 @@ console.log(route.params.id)
 
 console.log(object_data_single)
 
-
-
-// PROPS
-const props = defineProps({
-
-})
 
 
 //METHODS

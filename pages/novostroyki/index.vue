@@ -38,7 +38,9 @@
 
                 <!-- object map -->
                 <div class="real-estate-catalog-sec__map-wrapper estate-map" >
-                    <component__map   :mapObjectsList="all_object_filtr" :regionList="all_locations" />
+                    <ClientOnly>
+                        <component__map   :mapObjectsList="all_object_filtr" :regionList="all_locations" />
+                    </ClientOnly>
                 </div>
             </div>
         </section>
