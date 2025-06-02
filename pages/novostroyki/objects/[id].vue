@@ -36,7 +36,7 @@
                     <div class="single-object-front-sec__info-wrapper">
                         <div class="single-object-front-sec__info-row">
                             <div class="single-object-front-sec__info-left">
-                                <h2 class="single-object-front-sec__info-title">ЖК «Элитный квартал Тишинский бульвар»</h2>
+                                <h2 class="single-object-front-sec__info-title">{{object_data_single[0].title.rendered}}</h2>
                                 <div class="single-object-front-sec__info-adress">
                                     <div class="object-element__location">
                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +144,7 @@
         
         <section class="single-object-description-sec">
             <div class="single-object-container">
-                <p class="single-object-description-sec__title">О жилом комплексе «Береговой»</p>
+                <p class="single-object-description-sec__title">О жилом комплексе</p>
                 <div class="single-object-description-sec__text-container ">
 
                     <div class="single-object-description-sec__text" 
@@ -207,9 +207,15 @@
                             <li class="characteristics-cluster-list__item">
                                 <span class="characteristics-cluster-list__item-name">Застройщик</span>
                                 <span class="characteristics-cluster-list__item-value">
-                                    <a v-for="item in object_data_single[0].acf.zastrojshhik" :key="item"  class="characteristics-cluster-list__item-link">
+                                    <!-- <a v-for="item in object_data_single[0].acf.zastrojshhik" :key="item" :href=""  class="characteristics-cluster-list__item-link">
                                         {{ item.post_title }}
-                                    </a>
+                                    </a> -->
+                                    <NuxtLink v-for="item in object_data_single[0].acf.zastrojshhik" :key="item" 
+                                    class="characteristics-cluster-list__item-link" 
+                                    :to="'/zastroishchiki/' + item.post_name">
+                                    {{ item.post_title }}
+                                    </NuxtLink>
+                                    
                                 </span>
                             </li>
                         </ul>

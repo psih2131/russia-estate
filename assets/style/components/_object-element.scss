@@ -172,6 +172,8 @@
         max-width: 210px;
         max-height: 35px;
         display: block;
+        filter: grayscale(100%);
+        opacity: 0.4;
     }
 }
 

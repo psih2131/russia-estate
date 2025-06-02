@@ -73,10 +73,10 @@
                 <div class="object-element__button-row">
                     <NuxtLink class="object-element__btn-view-object btn-v1" :to="'/novostroyki/objects/' + objectData.slug">Ознакомиться с обьектом</NuxtLink>
 
-                    <a href="" class="object-element__developer-big-card" v-for="item in objectData.acf.zastrojshhik" :key="item">
-                        <img src="@/assets/images/developer.png" alt="">
-                        {{ item.post_title }}
-                    </a>
+                    <NuxtLink class="object-element__developer-big-card"  :to="'/novostroyki/zastroishchiki/' + cuurentDeveloperData.slug">
+                        <img :src="cuurentDeveloperData.acf.ikonki_dlya_obekta.url" :alt="cuurentDeveloperData.acf.ikonki_dlya_obekta.alt">
+                    </NuxtLink>
+                   
                 </div>
             </div>
             
@@ -105,6 +105,7 @@ const containerRef = ref(null)
  const props = defineProps({
   objectData: Object,
   currentClass: Object,
+  cuurentDeveloperData: Object,
   
   })
 

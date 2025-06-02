@@ -112,7 +112,6 @@ function startFiltrScript(data){
         let inProgress
         let inRegion
 
-
         if(filtrParametrs.ready && filtrParametrs.ready != '' && filtrParametrs.ready != 'Сдано домов'){
 
           let getCurrentValueMin 
@@ -149,6 +148,7 @@ function startFiltrScript(data){
         else{
             inReady = true
         }
+
 
 
 
@@ -191,6 +191,7 @@ function startFiltrScript(data){
 
 
 
+
         if(filtrParametrs.region && filtrParametrs.region != '' && filtrParametrs.region != 'Регион деятельности'){
 
           let regionStatus = false
@@ -218,28 +219,16 @@ function startFiltrScript(data){
     })
     console.log('nevArray',nevArray)
     all_dev_filtr.value = nevArray
-   
-
 }
-
-
-
-
-
-
 
 //HOOKS
 onMounted(() => {
   // Добавляем обработчик события scroll
-
-  
 });
 
 onBeforeUnmount(() => {
 
 });
-
-
 
  // props
  const props = defineProps({

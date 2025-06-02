@@ -30,7 +30,7 @@
                     <!-- objects list -->
                     <div class="real-estate-catalog-sec__objects-container" :class="{'real-estate-catalog-sec__objects-container_table-view': objectViewStatus == 1}">
                     
-                        <component__object v-for="(item,index) in all_object_filtr" :key="index" :objectData="item" :currentClass="all_class"/>
+                        <component__object v-for="(item,index) in all_object_filtr" :key="index" :objectData="item" :currentClass="all_class" :cuurentDeveloperData="getCurrentDeveloper(item)"/>
 
                     </div>
 
@@ -74,6 +74,8 @@ const { data: all_class } = await useFetch(`${store.serverUrlDomainRequest}/wp-j
 
 const { data: all_locations } = await useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/region`)
 
+const { data: all_developers } = await useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/zastroyshchiki`)
+
 
 
 console.log('objects',all_object)
@@ -84,8 +86,31 @@ console.log('add_class',all_class)
 
 console.log('all_locations',all_locations)
 
+console.log('all_developers',all_developers)
+
+
 
 //METHODS 
+
+function getCurrentDeveloper(item){
+    let currentItem = item.acf.zastrojshhik[0]
+    console.log('currentItem',currentItem)
+    
+    let currentValue
+    if(currentItem){
+        for(let i = 0; i < all_developers.value.length; i++){
+            if(+currentItem.ID == +all_developers.value[i].id){
+                currentValue = all_developers.value[i]
+             
+            }
+        } 
+    }
+    else{
+        currentValue = null
+    }
+
+    return currentValue;
+}
 
 function getCurrentClass(item){
     let currentItem = item[0]
