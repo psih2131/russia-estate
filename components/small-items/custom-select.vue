@@ -52,17 +52,7 @@ const dropdown = ref(null)
 
 const optionList = ref([
   { text: 'name value 1' },
-  { text: 'name value 2' },
-  { text: 'name value 3' },
-  { text: 'name value 4' },
-  { text: 'name value 1' },
-  { text: 'name value 2' },
-  { text: 'name value 3' },
-  { text: 'name value 4' },
-  { text: 'name value 1' },
-  { text: 'name value 2' },
-  { text: 'name value 3' },
-  { text: 'name value 4' },
+
 ])
 
 // Methods

@@ -8,16 +8,16 @@
                     <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="object-breadcrumbs__list">
                         
                         <li itemprop="itemListElement" class="object-breadcrumbs__item" itemscope itemtype="https://schema.org/ListItem">
-                            <a href="/" itemprop="item">
+                            <NuxtLink itemprop="item" to="/">
                                 <span itemprop="name">Главная -</span>
-                            </a>
+                            </NuxtLink>
                             <meta itemprop="position" content="1" />
                         </li>
 
                         <li itemprop="itemListElement" class="object-breadcrumbs__item" itemscope itemtype="https://schema.org/ListItem">
-                            <a href="/katalog" itemprop="item">
+                            <NuxtLink itemprop="item" to="/novostroyki">
                                 <span itemprop="name">Новостройки -</span>
-                            </a>
+                            </NuxtLink>
                             <meta itemprop="position" content="2" />
                         </li>
 
@@ -155,7 +155,6 @@
                         </div>
                     </div>
                     
-
                     <div class="single-object-description-sec__text-btn-row">
                         <button class="btn-v1 single-object-description-sec__text-btn" 
                         :class="{'single-object-description-sec__text-btn_activ': openStatusText}" 
@@ -168,12 +167,9 @@
                         </button>
                     </div>
                     
-
                 </div>
             </div>
         </section>
-
-
 
         <section class="single-object-characteristics-sec">
             <div class="single-object-container">
@@ -198,7 +194,6 @@
                                     <span class="characteristics-cluster-list__item-value" v-if="object_data_single[0].acf.status_doma">{{object_data_single[0].acf.status_doma}}</span>
                                     <span class="characteristics-cluster-list__item-value" v-else>-</span>
                                 </li>
-
                             </template>
                             
                             <li class="characteristics-cluster-list__item" v-if="object_data_single[0].acf.etazhnost">
@@ -219,7 +214,6 @@
                             </li>
                         </ul>
                     </div>
-
 
                     <div class="single-object-characteristics-sec__cluster">
                         <ul class="single-object-characteristics-sec__cluster-list characteristics-cluster-list">
@@ -248,7 +242,6 @@
                             </li>
                         </ul>
                     </div>
-
 
                     <div class="single-object-characteristics-sec__cluster">
                         <ul class="single-object-characteristics-sec__cluster-list characteristics-cluster-list">
@@ -289,63 +282,18 @@
             </div>
         </section>
 
-
-
         <section class="single-object-apartments-layout-sec">
             <div class="single-object-container">
                 <h2 class="single-object-apartments-layout-sec__title single-object-title-v1">Типы планировок</h2>
                 <div class="single-object-apartments-layout-sec__slider-wrapper">
-
-
-                    <!-- render only for server -->
-                    <div class="apartments-layout-server" v-if="clientStatus == false">
-                        <div class="apartments-layout-slider__item" v-for="item in object_data_single[0].acf.planirovki_kvartir" :key="item">
-                            <div class="apartments-layout-slider__item-wrapper" ref="itemWrappers">
-                                <div class="apartments-layout-slider__item-header">
-                                    <p class="apartments-layout-slider__item-title">{{item.title_project}}</p>
-                                    <div class="apartments-layout-slider__item-sale" v-if="item.sale">{{item.sale}}%</div>
-                                </div>
-                                <div class="apartments-layout-slider__item-plan-wrapper">
-                                    <img :src="item.plan_img.url" :alt="item.plan_img.alt"  class="apartments-layout-slider__item-plan">
-                                </div>
-                                <div class="apartments-layout-slider__item-dop-info">
-                                    <div class="apartments-layout-slider__item-dop-row">
-                                        <p class="apartments-layout-slider__item-type-name">{{item.plan_title}}</p>
-                                        <div class="apartments-layout-slider__item-price-wrapper">
-                                            <p class="apartments-layout-slider__item-current-price" v-if="item.price_current_rub">
-                                                {{item.price_current_rub}} ₽
-                                            </p>
-                                            <p class="apartments-layout-slider__item-old-price" v-if="item.price_old_rub">
-                                                {{item.price_old_rub}} ₽
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="apartments-layout-slider__item-dop-info-string" v-if="item.plan_dop_info && item.plan_dop_info.length > 0">
-                                        <p class="apartments-layout-slider__item-dop-info-string-value" 
-                                        v-for="element in item.plan_dop_info" :key="element">
-                                        {{ element.text }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- render only for client -->
-                    <ClientOnly>
+                    <!-- <ClientOnly> -->
                     <swiper-container 
                     ref="apartmentsRef" 
                     class="apartments-layout-slider"
                     :pagination="{
                     dynamicBullets: true,
                     clickable: true
-                    }"
-
-                    :navigation="{
-                        enabled: true,
-                        prevEl: '.swiper-button-prev',
-                        nextEl: '.swiper-button-next'
                     }"
                     >
                         <swiper-slide v-for="item in object_data_single[0].acf.planirovki_kvartir" :key="item">
@@ -386,14 +334,14 @@
 
                     </swiper-container>
                     
-                    </ClientOnly>
+                    <!-- </ClientOnly> -->
 
-                    <div class="swiper-button-prev custom-nav" >
+                    <div class="swiper-button-prev custom-nav" @click="swiperApartLayout.prev()">
                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
                         </svg>
                     </div>
-                    <div class="swiper-button-next custom-nav" >
+                    <div class="swiper-button-next custom-nav" @click="swiperApartLayout.next()">
                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
                         </svg>
@@ -401,8 +349,6 @@
                 </div>
             </div>
         </section>
-
-
 
         <section class="single-object-gallery-sec">
             <div class="single-object-container">
@@ -416,19 +362,13 @@
 
             <div class="single-object-gallery-sec__slider-wrapper">
                 <!-- render only for client -->
-                <ClientOnly>
+                <!-- <ClientOnly> -->
                 <swiper-container 
                 ref="galleryRef" 
                 class="gallery-slider"
                 :pagination="{
                 dynamicBullets: true,
                 clickable: true
-                }"
-
-                :navigation="{
-                    enabled: true,
-                    prevEl: '.gallery-button-prev',
-                    nextEl: '.gallery-button-next'
                 }"
                 >
                     <swiper-slide v-for="item in object_data_single[0].acf.object_gallery_images" :key="item">
@@ -443,14 +383,14 @@
 
                 </swiper-container>
                     
-                </ClientOnly>
+                <!-- </ClientOnly> -->
 
-                <div class="gallery-button-prev custom-nav" >
+                <div class="gallery-button-prev custom-nav" @click="swiperGallery.prev()" >
                     <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
                     </svg>
                 </div>
-                <div class="gallery-button-next custom-nav" >
+                <div class="gallery-button-next custom-nav" @click="swiperGallery.next()">
                     <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
                     </svg>
@@ -458,8 +398,6 @@
 
             </div>
         </section>
-
-
 
         <section class="single-object-places-sec">
             <div class="single-object-container">
@@ -472,7 +410,7 @@
 
                 <div class="single-object-places-sec__slider-wrapper">
                     <!-- render only for client -->
-                    <ClientOnly>
+                    <!-- <ClientOnly> -->
                     <swiper-container 
                     ref="placesRef" 
                     class="places-slider"
@@ -481,11 +419,6 @@
                     clickable: true
                     }"
 
-                    :navigation="{
-                        enabled: true,
-                        prevEl: '.places-button-prev',
-                        nextEl: '.places-button-next'
-                    }"
                     >
                         <swiper-slide v-for="item in object_data_single[0].acf.tochki_interesa" :key="item">
 
@@ -503,14 +436,14 @@
 
                     </swiper-container>
                         
-                    </ClientOnly>
+                    <!-- </ClientOnly> -->
 
-                    <div class="places-button-prev custom-nav" >
+                    <div class="places-button-prev custom-nav" @click="swiperPlaces.prev()" >
                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
                         </svg>
                     </div>
-                    <div class="places-button-next custom-nav" >
+                    <div class="places-button-next custom-nav" @click="swiperPlaces.next()">
                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
                         </svg>
@@ -531,12 +464,12 @@
             </div>
         </section>
 
-
         <section class="single-object-recomends-sec" v-if="object_data_single && object_data_single.length > 0">
             <div class="single-object-container">
                 <h2 class="single-object-recomends-sec__title single-object-title-v1">Возможно вам будет интересно</h2>
 
                 <div class="single-object-recomends-sec__slider-wrapper">
+                    
                     <!-- render only for client -->
                     <!-- <ClientOnly> -->
                     <swiper-container 
@@ -546,56 +479,43 @@
                     dynamicBullets: true,
                     clickable: true
                     }"
-
-                    :navigation="{
-                        enabled: true,
-                        prevEl: '.recomend-button-prev',
-                        nextEl: '.recomend-button-next'
-                    }"
                     >
+
                         <swiper-slide v-for="item in object_data_single[0].acf.rekomenduemye_obekty" :key="item">
 
                             <div class="recomend-slider__wrapper">
                                 <component__recomend_object :recObjData="item" :currentClass="all_class"/>
                             </div>
                             
-                            
                         </swiper-slide>
 
                     </swiper-container>
-                        
                     <!-- </ClientOnly> -->
 
-                    <div class="recomend-button-prev custom-nav" >
+                    <div class="recomend-button-prev custom-nav" @click="swiperRecomend.prev()">
                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
                         </svg>
                     </div>
-                    <div class="recomend-button-next custom-nav" >
+                    <div class="recomend-button-next custom-nav" @click="swiperRecomend.next()">
                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
                         </svg>
                     </div>
+                   
                 </div>
             </div>
         </section>
-
-
-
-        
-        
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-               single object ({{ route.params.id }})<br><br>
         
     </main>
     
 </template>
 
 <script setup>
-//import component and global scripts
+//IMPORT
 import { useCounterStore } from '@/stores/counter'
 
-import { ref, onMounted, onBeforeUnmount, computed, watch,   } from 'vue';
+import { ref, onMounted, computed, watch,   } from 'vue';
 
 import component__map_single from '@/components/map/map-single-object.vue'
 
@@ -621,8 +541,6 @@ const apartmentsRef = ref(null)
 
 const itemWrappers = ref([]);
 
-const clientStatus = ref(false)
-
 const galleryRef = ref(null)
 
 const placesRef = ref(null)
@@ -637,10 +555,8 @@ console.log(object_data_single)
 
 // PROPS
 const props = defineProps({
-//   mainData: Object,
-      // postAllCategory: Object,
-})
 
+})
 
 
 //METHODS
@@ -670,9 +586,8 @@ const swiperPlaces = useSwiper(placesRef, {
    speed: 700,
 })
 
-
 //places gallery
-const swiperRecomend = useSwiper(recomendRef, {
+const  swiperRecomend  = useSwiper(recomendRef, {
    loop: true,
    slidesPerView: 4,
    spaceBetween: 0,   
@@ -696,7 +611,6 @@ function getCurrentClass(item){
     else{
         currentValue = null
     }
-
     return currentValue;
 }
 
@@ -722,7 +636,6 @@ function openText(){
     }
 }
 
-
 //HOOKS
 onMounted(async () => {
   await nextTick(); // Ждём полной отрисовки DOM
@@ -740,17 +653,8 @@ onMounted(async () => {
     el.style.height = `${maxHeight}px`;
   });
 
-
-  clientStatus.value = true
-  console.log(swiperApartLayout.instance)
-
 });
-
-
-onBeforeUnmount(() => {
-
-});
-
 
 
 </script>
+

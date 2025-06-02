@@ -11,7 +11,6 @@
 
                     </div>
 
-
                     <!-- seo box -->
                     <div class="real-estate-catalog-sec__seo-text-wrapper">
                         <div class="real-estate-catalog-sec__seo-text">
