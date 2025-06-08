@@ -96,7 +96,7 @@
     </yandex-map-clusterer>
                
     </yandex-map>
-    
+
   </div>
     
 </template>
@@ -133,6 +133,8 @@ const yMapCenterCordinats = ref({
     'lon': 55.755819,
     'lat': 37.61444538776031,
 })
+
+
 
 const camera = ref({
     duration: 2500,
@@ -6774,6 +6776,7 @@ const customization = shallowRef([
  const props = defineProps({
     yMapObjetList: Object,
     yMapStartLocation: Object,
+    mapCenterCurrent: Object
 
 })
 
@@ -6826,12 +6829,17 @@ function findCurrentObjectOnMap(currentValue) {
 watch(clusterer, val => console.log('cluster', val));
 
 watch(
+    
   () => props.yMapStartLocation,
   (newVal) => {
-    if (newVal?.acf) {
+
+
+     if (newVal?.acf) {
       yMapCenterCordinats.value.lon = newVal.acf.dolgota;
       yMapCenterCordinats.value.lat = newVal.acf.shirota;
+       
     }
+   
   },
   { immediate: true }
 )
@@ -6855,7 +6863,12 @@ watch(
 
 onMounted(() => {
   // Добавляем обработчик события scroll
-
+    if(props.mapCenterCurrent){
+        yMapCenterCordinats.value.lon = props.mapCenterCurrent.value.lat;
+        yMapCenterCordinats.value.lat = props.mapCenterCurrent.value.lng;
+        console.log('props.mapCenterCurrent',props.mapCenterCurrent)
+    }
+   
   
 });
 

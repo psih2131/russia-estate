@@ -73,7 +73,7 @@
                 <div class="object-element__button-row">
                     <NuxtLink class="object-element__btn-view-object btn-v1" :to="'/novostroyki/objects/' + objectData.slug">Ознакомиться с обьектом</NuxtLink>
 
-                    <NuxtLink class="object-element__developer-big-card"  :to="'/novostroyki/zastroishchiki/' + cuurentDeveloperData.slug">
+                    <NuxtLink v-if="cuurentDeveloperData" class="object-element__developer-big-card"  :to="'/zastroishchiki/' + cuurentDeveloperData.slug">
                         <img :src="cuurentDeveloperData.acf.ikonki_dlya_obekta.url" :alt="cuurentDeveloperData.acf.ikonki_dlya_obekta.alt">
                     </NuxtLink>
                    

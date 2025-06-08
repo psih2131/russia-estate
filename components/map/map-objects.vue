@@ -2,12 +2,12 @@
 
    <div class="map-objects">
 
-        <div class="map-objects__filtr-list">
+        <div class="map-objects__filtr-list" v-if="regionList">
             <item__map_select :regions="regionList" :current="regionCurrentTitle"/>
         </div>
 
         <div class="map-objects__yandex-container">
-          <item__map_yandex  :yMapObjetList="mapObjectsList" :yMapStartLocation="regionCurrentTitle"/>
+          <item__map_yandex  :yMapObjetList="mapObjectsList" :yMapStartLocation="regionCurrentTitle" :mapCenterCurrent="centeredMap"/>
         </div>
         
    </div>
@@ -30,6 +30,7 @@ const props = defineProps({
   regionList: Object,
   mapObjectsList: Object,
   regionCurrentTitle: Object,
+  centeredMap: Object,
 });
 
 

@@ -6774,6 +6774,7 @@ const customization = shallowRef([
  const props = defineProps({
     yMapObjetList: Object,
   
+  
 
 })
 

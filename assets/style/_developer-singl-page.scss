@@ -1,0 +1,98 @@
+.developer-hero-sec {
+    padding-top: 20px;
+    padding-bottom: 100px;
+
+    .developer-element {
+        margin-top: 30px;
+    }
+}
+
+.developer-about-sec {
+    padding-bottom: 130px;
+
+    .single-object-description-sec__text {
+        height: 220px;
+    }
+
+    .wp-editor {
+        p {
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+    }
+}
+
+.developer-about-sec__title {
+    color: $textColorDark;
+    font-family: $titleFont;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    /* 38.4px */
+    margin-bottom: 30px;
+}
+
+.developer-objects-sec {
+    margin-bottom: 130px;
+}
+
+.developer-objects-sec__title {
+    color: $textColorDark;
+    font-family: $titleFont;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+
+    span {
+        color: $greyV3;
+    }
+}
+
+.developer-objects-sec__wrapper {
+    margin-top: 50px;
+
+    .object-element {
+        margin: 0 0 30px 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .object-element__body {
+        height: auto;
+    }
+
+    .object-element__info-row {
+        justify-content: flex-start;
+    }
+
+    .object-element__info-element {
+        margin-right: 50px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.developer-map-sec {
+    padding-bottom: 130px;
+}
+
+.developer-map-sec__title {
+    color: $textColorDark;
+    font-family: $titleFont;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}
+
+.developer-map-sec__y-map-wrapper {
+    width: 100%;
+    height: 675px;
+    margin-top: 50px;
+}
