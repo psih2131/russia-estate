@@ -82,6 +82,110 @@
         </div>
        </section>
 
+
+       <section class="developer-dop-info">
+        <div class="developer-container">
+            <h3 class="developer-dop-info__title">Дополнительная информация</h3>
+            <div class="developer-dop-info__wrapper">
+                <ul class="developer-dop-info__header-row">
+
+                    <li class="developer-dop-info__header-element"
+                    :class="{'developer-dop-info__header-element--activ': currentDopInfoIndex == 1}" 
+                    @click="currentDopInfoIndex = 1">Учередители</li>
+
+                    <li class="developer-dop-info__header-element"
+                    :class="{'developer-dop-info__header-element--activ': currentDopInfoIndex == 2}"
+                    @click="currentDopInfoIndex = 2">Данные банка</li>
+
+                    <li class="developer-dop-info__header-element"
+                    :class="{'developer-dop-info__header-element--activ': currentDopInfoIndex == 3}"
+                    @click="currentDopInfoIndex = 3">Документы</li>
+
+                </ul>
+                <div class="developer-dop-info__body">
+                    <div class="developer-dop-info__body-element" v-if="currentDopInfoIndex == 1">
+                        <div class="developer-dop-info__body-element-row" v-for="item in developer_data_single[0].acf['dop_informacziya_-_uchirediteli']" :key="item">
+                            <p class="developer-dop-info__body-element-row-title">{{item.nazvanie}}</p>
+                            <p class="developer-dop-info__body-element-row-value">{{item.znachenie}}</p>
+                        </div>
+                    </div>
+
+                    <div class="developer-dop-info__body-element" v-if="currentDopInfoIndex == 2">
+                        <div class="developer-dop-info__body-element-row" v-for="item in developer_data_single[0].acf['dop_informacziya_-_bank']" :key="item">
+                            <p class="developer-dop-info__body-element-row-title">{{item.nazvanie}}</p>
+                            <p class="developer-dop-info__body-element-row-value">{{item.znachenie}}</p>
+                        </div>
+                    </div>
+
+                    <div class="developer-dop-info__body-element" v-if="currentDopInfoIndex == 3">
+                        <div class="developer-dop-info__body-element-row" v-for="item in developer_data_single[0].acf['dop_informacziya_-_dokumenty']" :key="item">
+                            <p class="developer-dop-info__body-element-row-title">{{item.nazvanie}}</p>
+                            <p class="developer-dop-info__body-element-row-value">
+                                <a :href="item.fajl.url" download="">{{item.fajl.title}}.{{item.fajl.subtype}}</a>
+                                ({{ toMB(item.fajl.filesize) }})
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       </section>
+
+        <section class="developer-reccomends">
+            <div class="developer-container">
+                <h3 class="developer-reccomends__title">Другие застройщики</h3>
+
+                <div class="developer-reccomends__slider-wrapper">
+                    
+                    <!-- render only for client -->
+                    <!-- <ClientOnly> -->
+                    <swiper-container 
+                    ref="recomendRef" 
+                    class="recomend-slider-developers"
+                    :pagination="{
+                    dynamicBullets: true,
+                    clickable: true
+                    }"
+                    >
+
+                        <swiper-slide v-for="item in recomendDevelopersList" :key="item">
+
+                            <div class="recomend-slider-developers__wrapper" ref="itemWrappers">
+                               
+                                <componentDeveloperSmall :mainData="item" />
+                            </div>
+                            
+                        </swiper-slide>
+
+                        <swiper-slide v-for="item in recomendDevelopersList" :key="item">
+
+                            <div class="recomend-slider-developers__wrapper" ref="itemWrappers">
+                               
+                                <componentDeveloperSmall :mainData="item" />
+                            </div>
+                            
+                        </swiper-slide>
+
+
+                    </swiper-container>
+                    <!-- </ClientOnly> -->
+
+                    <div class="recomend-developers__wrapper-button-prev custom-nav" @click="swiperRecomend.prev()">
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.15429 13.7071C8.53841 13.3166 8.53841 12.6834 8.15429 12.2929L2.94817 7L8.15429 1.70711C8.53841 1.31658 8.53841 0.683417 8.15429 0.292893C7.77017 -0.0976315 7.14738 -0.0976315 6.76326 0.292893L0.861622 6.29289C0.4775 6.68342 0.4775 7.31658 0.861622 7.70711L6.76326 13.7071C7.14738 14.0976 7.77017 14.0976 8.15429 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+                    <div class="recomend-developers__wrapper-button-next custom-nav" @click="swiperRecomend.next()">
+                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.845709 13.7071C0.461587 13.3166 0.461587 12.6834 0.845709 12.2929L6.05183 7L0.845708 1.70711C0.461586 1.31658 0.461586 0.683417 0.845708 0.292893C1.22983 -0.0976315 1.85262 -0.0976315 2.23674 0.292893L8.13838 6.29289C8.5225 6.68342 8.5225 7.31658 8.13838 7.70711L2.23674 13.7071C1.85262 14.0976 1.22983 14.0976 0.845709 13.7071Z" fill="#5D736E"/>
+                        </svg>
+                    </div>
+                   
+                </div>
+
+            </div>
+        </section>
+
         
     </main>
     
@@ -99,6 +203,9 @@ import component__object from '@/components/component__object.vue'
 
 import component__map from '@/components/map/map-objects.vue'
 
+import componentDeveloperSmall from '@/components/component__developer-element-small.vue'
+
+
 
 //DATA
 
@@ -107,6 +214,8 @@ const route = useRoute()
 const store = useCounterStore()
 
 const developerObjectList = ref([])
+
+const recomendDevelopersList = ref([])
 
 const centerMapData = ({})
 
@@ -117,6 +226,7 @@ const { data: developer_data_single } = await useFetch(
   { key: `zastrojshchik-${route.params.id}` }
 )
 
+//get object for current developer
 if (developer_data_single.value && developer_data_single.value[0]?.acf?.proekty_zastrojshhika?.length) {
 
   const slugs = developer_data_single.value[0].acf.proekty_zastrojshhika.map(obj => obj.post_name)
@@ -128,6 +238,21 @@ if (developer_data_single.value && developer_data_single.value[0]?.acf?.proekty_
   )
 
   developerObjectList.value = await Promise.all(promises)
+}
+
+
+//get recomend developers list
+if (developer_data_single.value && developer_data_single.value[0]?.acf?.rekomenduemye_zastrojshhiki?.length) {
+
+  const slugs = developer_data_single.value[0].acf.rekomenduemye_zastrojshhiki.map(obj => obj.post_name)
+
+  const promises = slugs.map(slug =>
+    useFetch(`${store.serverUrlDomainRequest}/wp-json/wp/v2/zastroyshchiki?slug=${slug}`, {
+      key: `zastroyshchik-${slug}`
+    }).then(r => r.data.value?.[0] || null)
+  )
+
+  recomendDevelopersList.value = await Promise.all(promises)
 }
 
 
@@ -143,6 +268,12 @@ const openStatusText = ref(false)
 const textEditor = ref(null)
 
 const textEditorWrapper = ref(null)
+
+const currentDopInfoIndex = ref(1)
+
+const recomendRef = ref(null)
+
+const itemWrappers = ref([])
 
 console.log(route.params.id)
 
@@ -167,11 +298,39 @@ function openText(){
     }
 }
 
+function toMB(bytes) {
+  return (bytes / 1048576).toFixed(2) + ' MB'
+}
+
+//recomend gallery
+const  swiperRecomend  = useSwiper(recomendRef, {
+   loop: true,
+   slidesPerView: 3,
+   spaceBetween: 0,   
+   speed: 700,
+})
+
 
 //HOOKS
+//HOOKS
 onMounted(async () => {
+  await nextTick(); // Ждём полной отрисовки DOM
+
+  // Сбросим текущие высоты (если нужно повторно вызывать)
+  itemWrappers.value.forEach((el) => {
+    el.style.height = 'auto';
+  });
+
+  // Найдём максимальную высоту
+  const maxHeight = Math.max(...itemWrappers.value.map(el => el.offsetHeight));
+
+  // Установим всем одинаковую высоту
+  itemWrappers.value.forEach((el) => {
+    el.style.height = `${maxHeight}px`;
+  });
 
 });
+
 
 
 </script>
