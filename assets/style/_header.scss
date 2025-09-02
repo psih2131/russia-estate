@@ -43,6 +43,13 @@
 			transition: all ease 0.3s;
 		}
 	}
+
+	.router-link-active {
+		font-weight: 500;
+		background: #fff;
+		color: $textColorDark;
+
+	}
 }
 
 .header__nav-link {
@@ -55,12 +62,7 @@
 
 
 
-.router-link-active {
-	font-weight: 500;
-	background: #fff;
-	color: $textColorDark;
 
-}
 
 .header__icons-row {
 	display: flex;

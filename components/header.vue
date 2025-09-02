@@ -24,7 +24,7 @@
                     </li>
 
                     <li class="header__nav-list">
-                        <a href="" class="header__nav-link">Новости недвижимости</a>
+                        <NuxtLink class="header__nav-link" to="/blog">Новости недвижимости</NuxtLink>
                     </li>
                 </ul>
             </nav>

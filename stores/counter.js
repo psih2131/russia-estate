@@ -9,6 +9,8 @@ export const useCounterStore = defineStore('counter', () => {
 
     const currentIdForOpenObjectOnMap = ref(null)
 
+    const domainUrlCurrent = ref('https://gift-siberia.com')
+
     const objectViewSwitch = ref(0)
 
     // const doubleCount = computed(() => count.value * 2)
@@ -33,6 +35,7 @@ export const useCounterStore = defineStore('counter', () => {
         currentIdForOpenObjectOnMap,
         serverUrlDomainRequest,
         objectViewSwitch,
+        domainUrlCurrent,
 
         changeCurrentIdForOpenObjectOnMap,
         changeObjectViewSwitch

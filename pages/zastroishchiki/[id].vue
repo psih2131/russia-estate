@@ -228,7 +228,7 @@ const { data: developer_data_single } = await useFetch(
 
 //get object for current developer
 if (developer_data_single.value && developer_data_single.value[0]?.acf?.proekty_zastrojshhika?.length) {
-
+    
   const slugs = developer_data_single.value[0].acf.proekty_zastrojshhika.map(obj => obj.post_name)
 
   const promises = slugs.map(slug =>
